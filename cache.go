@@ -13,13 +13,13 @@ func renameKey(key string) (string, string) {
 	return splitted[0], splitted[1]
 }
 
-// Save a bunch of keys in the traversal cache
-func (t *Trv) Save(keys ...string) *Trv {
+// ShallowSave saves a bunch of keys in the traversal cache
+func (t *Trv) ShallowSave(keys ...string) *Trv {
 
 	// Deep Calls
 	if t.isDeep {
 		for _, nestedTrv := range t.trvs {
-			nestedTrv.Save(keys...)
+			nestedTrv.ShallowSave(keys...)
 		}
 		return t
 	}
