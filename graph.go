@@ -22,7 +22,7 @@ type Edge interface {
 // it has a unique key
 type Node interface {
 	Get(key string) (interface{}, error)
-	In(graph Graph, label string) (map[string]Edge, error)
-	Out(graph Graph, label string) (map[string]Edge, error)
+	InE(graph Graph, label string) (map[string]Edge, error)
+	OutE(graph Graph, label string) (map[string]Edge, error)
 	Key() string
 }

@@ -23,9 +23,9 @@ func (t *Trv) hop(getIncomingNodes bool, label string, rememberPath bool) *Trv {
 
 		// Loop over all its relationships
 		if getIncomingNodes {
-			edges, err = aNode.In(t.graph, label)
+			edges, err = aNode.InE(t.graph, label)
 		} else {
-			edges, err = aNode.Out(t.graph, label)
+			edges, err = aNode.OutE(t.graph, label)
 		}
 		if err != nil {
 			t.AddError(err)

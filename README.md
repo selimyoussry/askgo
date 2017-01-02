@@ -47,11 +47,11 @@ and `askgo.Node` implements the following interface
 // Get returns a property, given its key, and an error if it could not be found
 Get(key string) (interface{}, error)
 
-// In returns a map of outgoing edges with the given label, indexed by their key
-In(g askgo.Graph, label string) (map[string]askgo.Edge, error)
+// InE returns a map of outgoing edges with the given label, indexed by their key
+InE(g askgo.Graph, label string) (map[string]askgo.Edge, error)
 
-// Out returns a map of outgoing edges with the given label, indexed by their key
-Out(g askgo.Graph, label string) (map[string]askgo.Edge, error)
+// OutE returns a map of outgoing edges with the given label, indexed by their key
+OutE(g askgo.Graph, label string) (map[string]askgo.Edge, error)
 
 // Key returns the key
 Key() string
