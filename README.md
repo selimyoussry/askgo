@@ -26,19 +26,19 @@ where `askgo.Edge` implements
 Get(key string) (interface{}, error)
 
 // Start returns the start node
-Start(graph askgo.Graph) (askgo.Node, error)
+StartN(graph askgo.Graph) (askgo.Node, error)
 
 // End returns the end node
-End(graph askgo.Graph) (askgo.Node, error)
+EndN(graph askgo.Graph) (askgo.Node, error)
 
 // Hop returns either the start or end node
 Hop(graph askgo.Graph, key string) (askgo.Node, error)
 
 // Label returns the edge label
-Label() string
+GetLabel() string
 
 // Key returns the key
-Key() string
+GetKey() string
 ```
 
 and `askgo.Node` implements the following interface
@@ -54,5 +54,5 @@ InE(g askgo.Graph, label string) (map[string]askgo.Edge, error)
 OutE(g askgo.Graph, label string) (map[string]askgo.Edge, error)
 
 // Key returns the key
-Key() string
+GetKey() string
 ```

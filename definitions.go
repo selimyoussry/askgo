@@ -34,7 +34,7 @@ func NewTrvWithPath(graph Graph, path map[string][]*Step, starts ...string) *Trv
 			errors = append(errors, err)
 			continue
 		}
-		result[node.Key()] = node
+		result[node.GetKey()] = node
 	}
 
 	return &Trv{

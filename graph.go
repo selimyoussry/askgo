@@ -10,11 +10,11 @@ type Graph interface {
 // it has a unique key
 type Edge interface {
 	Get(key string) (interface{}, error)
-	Start(graph Graph) (Node, error)
-	End(graph Graph) (Node, error)
+	StartN(graph Graph) (Node, error)
+	EndN(graph Graph) (Node, error)
 	Hop(graph Graph, key string) (Node, error)
-	Label() string
-	Key() string
+	GetLabel() string
+	GetKey() string
 }
 
 // Node needs to be able to access its properties,
@@ -24,5 +24,5 @@ type Node interface {
 	Get(key string) (interface{}, error)
 	InE(graph Graph, label string) (map[string]Edge, error)
 	OutE(graph Graph, label string) (map[string]Edge, error)
-	Key() string
+	GetKey() string
 }

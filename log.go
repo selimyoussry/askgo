@@ -49,7 +49,7 @@ func (t *Trv) LogPath() *Trv {
 
 		steps := []string{}
 		for _, step := range onePath {
-			steps = append(steps, fmt.Sprintf("%s (%s)", step.Node.Key(), step.Edge.Key()))
+			steps = append(steps, fmt.Sprintf("%s (%s)", step.Node.GetKey(), step.Edge.GetKey()))
 		}
 
 		fmt.Printf("%s: %s \n", nodeKey, strings.Join(steps, " > "))

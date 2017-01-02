@@ -28,7 +28,7 @@ func (t *Trv) Deepen() *Trv {
 	trvs := map[string]*Trv{}
 	for _, node := range t.result {
 		// Use the node key as a query key
-		nodeKey := node.Key()
+		nodeKey := node.GetKey()
 		trvs[nodeKey] = NewTrvWithPath(t.graph, t.path, nodeKey)
 	}
 

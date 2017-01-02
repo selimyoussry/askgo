@@ -40,7 +40,7 @@ func (t *Trv) hop(getIncomingNodes bool, label string, rememberPath bool) *Trv {
 				continue
 			}
 
-			bNodeKey := bNode.Key()
+			bNodeKey := bNode.GetKey()
 			newResult[bNodeKey] = bNode
 			if rememberPath {
 				newPath[bNodeKey] = append(t.path[bNodeKey], NewStep(aNode, edge))
