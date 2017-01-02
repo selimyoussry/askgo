@@ -12,6 +12,7 @@ type Edge interface {
 	Get(key string) (interface{}, error)
 	Start(graph Graph) (Node, error)
 	End(graph Graph) (Node, error)
+	Hop(graph Graph, key string) (Node, error)
 	Label() string
 	Key() string
 }
@@ -22,6 +23,6 @@ type Edge interface {
 type Node interface {
 	Get(key string) (interface{}, error)
 	In(graph Graph, label string) (map[string]Edge, error)
-	End(graph Graph, label string) (map[string]Edge, error)
+	Out(graph Graph, label string) (map[string]Edge, error)
 	Key() string
 }

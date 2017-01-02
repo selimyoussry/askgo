@@ -19,11 +19,11 @@ type Trv struct {
 	trvs   map[string]*Trv
 	isDeep bool
 
-	errors []error
+	Errors []error
 }
 
-// NewQueryWithPath instanciates
-func NewQueryWithPath(graph Graph, path map[string][]*Step, starts ...string) *Trv {
+// NewTrvWithPath instanciates
+func NewTrvWithPath(graph Graph, path map[string][]*Step, starts ...string) *Trv {
 	result := map[string]Node{}
 	errors := []error{}
 
@@ -47,8 +47,8 @@ func NewQueryWithPath(graph Graph, path map[string][]*Step, starts ...string) *T
 	}
 }
 
-// NewQuery instanciates with an empty path
-func NewQuery(g Graph, starts ...string) *Trv {
+// NewTrv instanciates with an empty path
+func NewTrv(g Graph, starts ...string) *Trv {
 
 	// Create the "empty" path
 	path := map[string][]*Step{}
@@ -56,7 +56,7 @@ func NewQuery(g Graph, starts ...string) *Trv {
 		path[start] = []*Step{}
 	}
 
-	return NewQueryWithPath(g, path, starts...)
+	return NewTrvWithPath(g, path, starts...)
 }
 
 // Step remembers the node + edge needed to get from A to B
