@@ -64,7 +64,7 @@ func (t *Trv) DeepSave(name string) *Trv {
 	// Otherwise, this is the level before the lowest
 	// We can flatten the cache
 	for nodeKey, nestedTrv := range t.trvs {
-		_, exists := t.trvs[nodeKey]
+		_, exists := t.cache[nodeKey]
 		if !exists {
 			t.cache[nodeKey] = map[string]interface{}{}
 		}

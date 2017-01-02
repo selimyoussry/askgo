@@ -27,7 +27,7 @@ func main() {
 		if err != nil {
 			return false
 		}
-		for _, sonCompany := range q.Result() {
+		for _, sonCompany := range t.Result() {
 			sonCompanyName, err := sonCompany.Get("name")
 			if err != nil {
 				continue
@@ -60,12 +60,12 @@ func main() {
 		Log("1.95 second filter").
 		Flatten().
 		Log("1.96 Re-flatten").
-		Save("name::sonName"). // son name
+		ShallowSave("name::sonName"). // son name
 		DeepSave("sons").
 		Log("2. Sons").
 		Flatten().
 		Log("3. Flattened").
-		Save("name::fatherName", "age").
+		ShallowSave("name::fatherName", "age").
 		Log("1.5 Father name").
 		Return()
 
