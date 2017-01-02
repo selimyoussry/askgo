@@ -44,3 +44,34 @@ func (t *Trv) ShallowSave(keys ...string) *Trv {
 	}
 	return t
 }
+
+// DeepSave the outermost cache the the level just below it
+func (t *Trv) DeepSave(name string) *Trv {
+
+	// Nothing to flatten
+	if !t.isDeep {
+		return t
+	}
+
+	// If it's actually too deep, we keep going
+	if t.IsVeryDeep() {
+		for _, nestedTrv := range t.trvs {
+			nestedTrv.DeepSave(name)
+		}
+		return t
+	}
+
+	// Otherwise, this is the level before the lowest
+	// We can flatten the cache
+	for nodeKey, nestedTrv := range t.trvs {
+		_, exists := t.trvs[nodeKey]
+		if !exists {
+			t.cache[nodeKey] = map[string]interface{}{}
+		}
+
+		t.cache[nodeKey][name] = nestedTrv.cache
+	}
+
+	return t
+
+}
