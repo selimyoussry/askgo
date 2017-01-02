@@ -26,3 +26,39 @@ func (t *Trv) ShallowFilter(predicate func(Node, []*Step) bool) *Trv {
 	return t
 
 }
+
+// DeepFilter filters the N-1 result based on the outermost (N) level
+func (t *Trv) DeepFilter(keepQuery func(*Trv, []*Step) bool) *Trv {
+
+	// Nothing to filter
+	if !t.isDeep {
+		return t
+	}
+
+	// If it's actually too deep, we keep going
+	if t.IsVeryDeep() {
+		for _, nestedTrv := range t.trvs {
+			nestedTrv.DeepFilter(keepQuery)
+		}
+		return t
+	}
+
+	// Otherwise, this is the level before the lowest
+	nodesToDiscard := []string{}
+	for nodeKey, nestedTrv := range t.trvs {
+
+		// if we need to filter this
+		if !keepQuery(nestedTrv, t.path[nodeKey]) {
+			nodesToDiscard = append(nodesToDiscard, nodeKey)
+		}
+
+	}
+
+	// Delete the nodes that have been filtered
+	for _, nodeKey := range nodesToDiscard {
+		delete(t.result, nodeKey)
+		delete(t.trvs, nodeKey)
+	}
+
+	return t
+}
