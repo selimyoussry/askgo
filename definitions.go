@@ -1,13 +1,15 @@
 // Package askgo provides traversal methods for directed property graphs
 package askgo
 
+import "github.com/hippoai/graphgo"
+
 // Trv implements the graph traversal
 type Trv struct {
 	// Underlying graph
-	graph Graph
+	graph graphgo.IGraph
 
 	// Current map of nodes (indexed by their keys) returned by the traversal
-	result map[string]Node
+	result map[string]graphgo.INode
 
 	// Cache results as the traversal grows
 	cache map[string](map[string]interface{})
@@ -23,8 +25,8 @@ type Trv struct {
 }
 
 // NewTrvWithPath instanciates
-func NewTrvWithPath(graph Graph, path map[string][]*Step, starts ...string) *Trv {
-	result := map[string]Node{}
+func NewTrvWithPath(graph graphgo.IGraph, path map[string][]*Step, starts ...string) *Trv {
+	result := map[string]graphgo.INode{}
 	errors := []error{}
 
 	// Get the starting points in the initial result
@@ -48,7 +50,7 @@ func NewTrvWithPath(graph Graph, path map[string][]*Step, starts ...string) *Trv
 }
 
 // NewTrv instanciates with an empty path
-func NewTrv(g Graph, starts ...string) *Trv {
+func NewTrv(g graphgo.IGraph, starts ...string) *Trv {
 
 	// Create the "empty" path
 	path := map[string][]*Step{}
@@ -61,12 +63,12 @@ func NewTrv(g Graph, starts ...string) *Trv {
 
 // Step remembers the node + edge needed to get from A to B
 type Step struct {
-	Node Node
-	Edge Edge
+	Node graphgo.INode
+	Edge graphgo.IEdge
 }
 
 // NewStep instanciates
-func NewStep(node Node, edge Edge) *Step {
+func NewStep(node graphgo.INode, edge graphgo.IEdge) *Step {
 	return &Step{
 		Node: node,
 		Edge: edge,

@@ -1,7 +1,9 @@
 package askgo
 
+import "github.com/hippoai/graphgo"
+
 // ShallowFilter the current nodes based on their properties and the path
-func (t *Trv) ShallowFilter(predicate func(Node, []*Step) bool) *Trv {
+func (t *Trv) ShallowFilter(predicate func(graphgo.INode, []*Step) bool) *Trv {
 
 	// Deep Calls
 	if t.isDeep {
@@ -11,7 +13,7 @@ func (t *Trv) ShallowFilter(predicate func(Node, []*Step) bool) *Trv {
 		return t
 	}
 
-	newResult := map[string]Node{}
+	newResult := map[string]graphgo.INode{}
 
 	// Loop over all the nodes in the current result
 	for nodeKey, node := range t.result {

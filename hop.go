@@ -1,5 +1,7 @@
 package askgo
 
+import "github.com/hippoai/graphgo"
+
 // hop from a current result to its neighbors, given a label
 // optionally remember the path
 func (t *Trv) hop(getIncomingNodes bool, label string, rememberPath bool) *Trv {
@@ -12,10 +14,10 @@ func (t *Trv) hop(getIncomingNodes bool, label string, rememberPath bool) *Trv {
 		return t
 	}
 
-	newResult := map[string]Node{}
+	newResult := map[string]graphgo.INode{}
 	newPath := map[string][]*Step{}
 
-	var edges map[string]Edge
+	var edges map[string]graphgo.IEdge
 	var err error
 
 	// Loop over all the nodes in current result

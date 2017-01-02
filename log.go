@@ -57,3 +57,23 @@ func (t *Trv) LogPath() *Trv {
 
 	return t
 }
+
+// Log logs everything
+func (t *Trv) Log(msgs ...string) *Trv {
+	for _, msg := range msgs {
+		fmt.Println(msg)
+	}
+
+	fmt.Println("> Cache")
+	t.LogCache()
+
+	fmt.Println("> Result")
+	t.LogResult()
+
+	fmt.Println("> Path")
+	t.LogPath()
+
+	fmt.Println("--- --- ---")
+
+	return t
+}
