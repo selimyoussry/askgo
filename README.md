@@ -13,10 +13,10 @@ We will run queries on top of a graph. Its purpose is to store data. In order fo
 
 ```go
 // GetEdge returns a pointer to an Edge, given its unique key, and an error if it could not be found
-GetEdge(key string) (*askgo.Edge, error)
+GetEdge(key string) (askgo.Edge, error)
 
 // GetNode returns a pointer to a Node, given its unique key, and an error if it could not be found
-GetNode(key string) (*askgo.Node, error)
+GetNode(key string) (askgo.Node, error)
 ```
 
 where `askgo.Edge` implements
@@ -26,10 +26,10 @@ where `askgo.Edge` implements
 Get(key string) (interface{}, error)
 
 // Start returns the start node
-Start(graph *askgo.Graph) (*askgo.Node, error)
+Start(graph askgo.Graph) (askgo.Node, error)
 
 // End returns the end node
-End(graph *askgo.Graph) (*askgo.Node, error)
+End(graph askgo.Graph) (askgo.Node, error)
 
 // Label returns the edge label
 Label() string
@@ -45,10 +45,10 @@ and `askgo.Node` implements the following interface
 Get(key string) (interface{}, error)
 
 // In returns a map of outgoing edges with the given label, indexed by their key
-In(g *askgo.Graph, label string) (map[string]*askgo.Edge, error)
+In(g askgo.Graph, label string) (map[string]askgo.Edge, error)
 
 // Out returns a map of outgoing edges with the given label, indexed by their key
-Out(g *askgo.Graph, label string) (map[string]*askgo.Edge, error)
+Out(g askgo.Graph, label string) (map[string]askgo.Edge, error)
 
 // Key returns the key
 Key() string
