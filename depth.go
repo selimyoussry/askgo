@@ -36,3 +36,25 @@ func (t *Trv) Deepen() *Trv {
 	t.isDeep = true
 	return t
 }
+
+// Flatten flattens a traversal to the lower level
+func (t *Trv) Flatten() *Trv {
+
+	// Nothing to flatten
+	if !t.isDeep {
+		return t
+	}
+
+	// If it's actually too deep, we keep going
+	if t.IsVeryDeep() {
+		for _, nestedTrv := range t.trvs {
+			nestedTrv.Flatten()
+		}
+		return t
+	}
+
+	t.trvs = map[string]*Trv{}
+	t.isDeep = false
+	return t
+
+}
