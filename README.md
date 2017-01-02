@@ -30,6 +30,12 @@ Start(graph *askgo.Graph) (*askgo.Node, error)
 
 // End returns the end node
 End(graph *askgo.Graph) (*askgo.Node, error)
+
+// Label returns the edge label
+Label() string
+
+// Key returns the key
+Key() string
 ```
 
 and `askgo.Node` implements the following interface
@@ -43,4 +49,7 @@ In(g *askgo.Graph, label string) (map[string]*askgo.Edge, error)
 
 // Out returns a map of outgoing edges with the given label, indexed by their key
 Out(g *askgo.Graph, label string) (map[string]*askgo.Edge, error)
+
+// Key returns the key
+Key() string
 ```
