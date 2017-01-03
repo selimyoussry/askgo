@@ -6,13 +6,24 @@ func build() *graphgo.Graph {
 
 	g := graphgo.NewEmptyGraph()
 
-	g.MergeNode("company.ups", map[string]interface{}{
-		"name":     "ups",
+	g.MergeNode("company.OnePlus", map[string]interface{}{
+		"name":     "OnePlus",
 		"location": "america",
 	})
-
 	g.MergeNode("person.patrick", map[string]interface{}{
 		"name": "patrick",
+		"age":  20,
+	})
+	g.MergeNode("person.tim", map[string]interface{}{
+		"name": "Tim",
+		"age":  48,
+	})
+	g.MergeNode("person.clara", map[string]interface{}{
+		"name": "Clara",
+		"age":  18,
+	})
+	g.MergeNode("person.jimbo", map[string]interface{}{
+		"name": "Jimbo",
 		"age":  20,
 	})
 
@@ -20,33 +31,50 @@ func build() *graphgo.Graph {
 		"name": "john",
 		"age":  55,
 	})
+	g.MergeNode("person.elliott", map[string]interface{}{
+		"name": "elliott",
+		"age":  80,
+	})
 
 	// Now, add the edges (relationships) between these nodes
 	g.MergeEdge(
-		"patrick.worksin.ups", "WORKS_IN",
-		"person.patrick", "company.ups",
+		"patrick.worksin.OnePlus", "WORKS_IN",
+		"person.patrick", "company.OnePlus",
 		map[string]interface{}{},
 	)
 	g.MergeEdge(
-		"john.worksin.ups", "WORKS_IN",
-		"person.john", "company.ups",
+		"john.worksin.OnePlus", "WORKS_IN",
+		"person.john", "company.OnePlus",
 		map[string]interface{}{},
 	)
 	g.MergeEdge(
-		"patrick.is_son_of.john", "IS_SON_OF",
-		"person.patrick", "person.john",
+		"tim.worksin.OnePlus", "WORKS_IN",
+		"person.tim", "company.OnePlus",
 		map[string]interface{}{},
 	)
-
-	// New son
-	g.MergeNode("person.tim", map[string]interface{}{
-		"name": "Tim",
-		"age":  28,
-	})
-
 	g.MergeEdge(
-		"tim.is_son_of.john", "IS_SON_OF",
-		"person.tim", "person.john",
+		"clara.worksin.OnePlus", "WORKS_IN",
+		"person.clara", "company.OnePlus",
+		map[string]interface{}{},
+	)
+	g.MergeEdge(
+		"john.is_father_of.patrick", "IS_FATHER_OF",
+		"person.john", "person.patrick",
+		map[string]interface{}{},
+	)
+	g.MergeEdge(
+		"tim.is_father_of.clara", "IS_FATHER_OF",
+		"person.tim", "person.clara",
+		map[string]interface{}{},
+	)
+	g.MergeEdge(
+		"tim.is_father_of.jimbo", "IS_FATHER_OF",
+		"person.tim", "person.jimbo",
+		map[string]interface{}{},
+	)
+	g.MergeEdge(
+		"elliott.is_father_of.john", "IS_FATHER_OF",
+		"person.elliott", "person.john",
 		map[string]interface{}{},
 	)
 
