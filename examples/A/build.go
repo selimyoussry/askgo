@@ -58,6 +58,11 @@ func build() *graphgo.Graph {
 		map[string]interface{}{},
 	)
 	g.MergeEdge(
+		"jimbo.worksin.OnePlus", "WORKS_IN",
+		"person.jimbo", "company.OnePlus",
+		map[string]interface{}{},
+	)
+	g.MergeEdge(
 		"john.is_father_of.patrick", "IS_FATHER_OF",
 		"person.john", "person.patrick",
 		map[string]interface{}{},

@@ -53,8 +53,16 @@ func (t *Trv) Flatten() *Trv {
 		return t
 	}
 
+	// Add the errors to the main traversal
+	for _, nestedTrv := range t.trvs {
+		for _, err := range nestedTrv.Errors {
+			t.Errors = append(t.Errors, err)
+		}
+	}
+
 	t.trvs = map[string]*Trv{}
 	t.isDeep = false
+
 	return t
 
 }
