@@ -51,13 +51,7 @@ result := traversal.
   Return()                         // Finally return the cache
 ```
 
-and if all went well you get the result
-
-```javascript
-{}
-```
-
-You can have a look at the [examples folder](https://github.com/hippoai/askgo/tree/master/examples/) for a more in-depth tutorial.
+This was example A. Feel free to run it locally to see the output. You can have a look at the [examples folder](https://github.com/hippoai/askgo/tree/master/examples/) for a more in-depth tutorial.
 
 ## API
 
