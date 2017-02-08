@@ -77,7 +77,7 @@ func (t *Trv) ShallowSaveF(f func(key string) (bool, string)) *Trv {
 // DeepSave the outermost cache the the level just below it
 func (t *Trv) DeepSave(name string) *Trv {
 
-	// Nothing to flatten
+	// Nothing to save, it is not deep
 	if !t.isDeep {
 		return t
 	}
