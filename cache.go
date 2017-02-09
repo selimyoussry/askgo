@@ -75,7 +75,7 @@ func (t *Trv) ShallowSaveF(f func(key string) (bool, string)) *Trv {
 }
 
 // DeepSave the outermost cache the the level just below it
-func (t *Trv) DeepSave(name string) *Trv {
+func (t *Trv) DeepSave(name string, simplify bool) *Trv {
 
 	// Nothing to save, it is not deep
 	if !t.isDeep {
@@ -85,7 +85,7 @@ func (t *Trv) DeepSave(name string) *Trv {
 	// If it's actually too deep, we keep going
 	if t.IsVeryDeep() {
 		for _, nestedTrv := range t.trvs {
-			nestedTrv.DeepSave(name)
+			nestedTrv.DeepSave(name, simplify)
 		}
 		return t
 	}
@@ -98,9 +98,20 @@ func (t *Trv) DeepSave(name string) *Trv {
 			t.cache[nodeKey] = map[string]interface{}{}
 		}
 
-		t.cache[nodeKey][name] = nestedTrv.cache
+		if simplify && len(nestedTrv.cache) == 1 {
+			t.cache[nodeKey][name] = popFirstEltInCache(nestedTrv.cache)
+		} else {
+			t.cache[nodeKey][name] = nestedTrv.cache
+		}
 	}
 
 	return t
 
+}
+
+func popFirstEltInCache(cache map[string](map[string]interface{})) map[string]interface{} {
+	for _, value := range cache {
+		return value
+	}
+	return nil
 }

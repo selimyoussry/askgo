@@ -13,8 +13,8 @@ import (
 
 type Level0 map[string]Level1
 type Level1 struct {
-	Father map[string]Level2 `json:"father"`
-	Name   string            `json:"name"`
+	Father Level2 `json:"father"`
+	Name   string `json:"name"`
 }
 type Level2 struct {
 	FatherName string `json:"fatherName"`
@@ -53,7 +53,7 @@ func TestTrv(t *testing.T) {
 		DeepFilter(HasResult).           // Because of the level 2 filtering above, there might be empty traversals at level 1, corresponding to fathers not working at OnePlus. We need to filter them out. This is very common, so askgo provides a built-in function for this.
 		ShallowSave("name::fatherName"). // Save in the top level the father name, call it fatherName
 		ShallowSave("inexistantField").  // This field does not exist, this will be reported in the errors
-		DeepSave("father").              // Saves the fathers' (level 2) cache in the lower level cache, under the name "father", for each employee
+		DeepSave("father", true).        // Saves the fathers' (level 2) cache in the lower level cache, under the name "father", for each employee
 		Flatten().                       // We are done at this level, so go back to level 1
 		ShallowSave("name")              // Now we save the employee's name (no alias this time, so no need for the a::b pattern)
 
@@ -70,12 +70,7 @@ func TestTrv(t *testing.T) {
 		t.Fatalf(goutil.Pretty(goerr.NewS("ERR_RESPONSE")))
 	}
 
-	claraFather, ok := clara.Father["person.tim"]
-	if !ok {
-		t.Fatalf(goutil.Pretty(goerr.NewS("ERR_RESPONSE")))
-	}
-
-	if claraFather.FatherName != "Tim" {
+	if clara.Father.FatherName != "Tim" {
 		t.Fatalf(goutil.Pretty(goerr.NewS("ERR_RESPONSE")))
 	}
 
