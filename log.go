@@ -1,23 +1,21 @@
 package askgo
 
 import (
-	"encoding/json"
 	"fmt"
 	"strings"
+
+	"github.com/hippoai/goutil"
 )
 
 // LogCache
 func (t *Trv) LogCache() *Trv {
-	b, _ := json.MarshalIndent(t.cache, "", "  ")
-	fmt.Println(string(b))
+	fmt.Println(goutil.Pretty(t.cache))
 	return t
 }
 
 // LogResult
 func (t *Trv) LogResult() *Trv {
-	out := t.deepLog()
-	b, _ := json.MarshalIndent(out, "", "  ")
-	fmt.Println(string(b))
+	fmt.Println(goutil.Pretty(t.deepLog()))
 	return t
 }
 
