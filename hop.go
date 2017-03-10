@@ -70,3 +70,11 @@ func (t *Trv) In(label string, rememberPath bool) *Trv {
 func (t *Trv) Out(label string, rememberPath bool) *Trv {
 	return t.hop(false, label, rememberPath)
 }
+
+// InOut moves the traversal to incoming then outgoing neighbors (useful for hyperedges)
+func (t *Trv) InOut(inLabel string, inRememberPath bool, outLabel string, outRememberPath bool) *Trv {
+	return t.
+		In(inLabel, inRememberPath).
+		Out(outLabel, outRememberPath)
+
+}
