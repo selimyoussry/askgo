@@ -11,6 +11,10 @@ func HasResult(trv *Trv, path []*Step) bool {
 	return trv.Size() > 0
 }
 
+func HasNoResult(trv *Trv, path []*Step) bool {
+	return trv.Size() == 0
+}
+
 // IsInValuesString returns a shallow filter
 // that will return true iff value is in given values
 func IsInValuesString(key string, values ...string) func(graphgo.INode, []*Step) bool {

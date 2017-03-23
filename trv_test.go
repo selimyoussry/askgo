@@ -54,8 +54,8 @@ func TestTrv(t *testing.T) {
 		ShallowSave("name::fatherName"). // Save in the top level the father name, call it fatherName
 		ShallowSave("inexistantField").  // This field does not exist, this will be reported in the errors
 		DeepSave("father", true).        // Saves the fathers' (level 2) cache in the lower level cache, under the name "father", for each employee
-		Flatten().                       // We are done at this level, so go back to level 1
-		ShallowSave("name")              // Now we save the employee's name (no alias this time, so no need for the a::b pattern)
+		Flatten().           // We are done at this level, so go back to level 1
+		ShallowSave("name"). // Now we save the employee's name (no alias this time, so no need for the a::b pattern)
 
 	// Make sure we can reformat the response
 	var trvResponse Level0
