@@ -37,15 +37,13 @@ func (ts *OrderedTrvs) Result() []map[string]graphgo.INode {
 	return ret
 }
 
-// ReturnSlice should find a ReturnSlice of size 1 every time
+// ReturnSlice
 func (ts *OrderedTrvs) ReturnSlice() []map[string]interface{} {
 	ret := []map[string]interface{}{}
 	for _, trv := range ts.Trvs {
-		rs := trv.ReturnSlice()
-		if len(rs) != 1 {
-			continue
+		for _, rs := range trv.ReturnSlice() {
+			ret = append(ret, rs)
 		}
-		ret = append(ret, rs[0])
 	}
 	return ret
 }
